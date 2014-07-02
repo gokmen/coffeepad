@@ -4,8 +4,7 @@
   "description": "CoffePad: yet another coffeescript editor",
   "main": "gulpfile.js",
   "scripts": {
-    "start": "npm install;gulp",
-    "build": "gulp build"
+    "start": "npm install;gulp"
   },
   "keywords": [
     "coffeescript", "chrome", "codemirror"

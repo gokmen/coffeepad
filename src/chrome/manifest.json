@@ -2,17 +2,9 @@
   "name": "CoffeePad",
   "version": "0.0.1",
   "description": "CoffeeScript console in the Web Inspector.",
-  "devtools_page": "launcher.html",
+  "devtools_page": "chrome/launcher.html",
   "icons": { "128": "images/coffeepad-icon.png" },
   "minimum_chrome_version" : "18",
-  "permissions": [
-    "tabs",
-    "storage",
-    "contextMenus"
-  ],
+  "permissions": [ "tabs" ],
   "manifest_version": 2
-  // "browser_action": {
-  //     "default_icon": "images/coffeepad-icon.png",
-  //     "default_popup": "index.html"
-  //   }
 }
