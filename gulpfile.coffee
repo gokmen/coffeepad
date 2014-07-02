@@ -137,16 +137,16 @@ gulp.task "create-links", ->
       './src/images',
       './src/css',
       './src/chrome',
-      './src/chrome/manifest.json',
       './src/index.html'
+      './src/manifest.json'
     ]
 
     .pipe symlink [
       './public/images',
       './public/css',
       './public/chrome',
-      './public/manifest.json',
       './public/index.html'
+      './public/manifest.json'
     ], force: yes
 
 
