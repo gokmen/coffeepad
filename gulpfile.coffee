@@ -1,20 +1,16 @@
-path       = require 'path'
 gulp       = require 'gulp'
 gutil      = require 'gulp-util'
-jade       = require 'gulp-jade'
 stylus     = require 'gulp-stylus'
 CSSmin     = require 'gulp-minify-css'
 browserify = require 'browserify'
 watchify   = require 'watchify'
+concat     = require 'gulp-concat'
 source     = require 'vinyl-source-stream'
 streamify  = require 'gulp-streamify'
-rename     = require 'gulp-rename'
 uglify     = require 'gulp-uglify'
 coffeeify  = require 'coffeeify'
 ecstatic   = require 'ecstatic'
 livereload = require 'gulp-livereload'
-plumber    = require 'gulp-plumber'
-prefix     = require 'gulp-autoprefixer'
 
 production = process.env.NODE_ENV is 'production'
 
@@ -50,7 +46,7 @@ gulp.task 'scripts', ->
     .on 'error', handleError
     .pipe source paths.scripts.filename
 
-  build.pipe(streamify(uglify())) if production
+  build.pipe streamify uglify() if production
 
   build
     .pipe gulp.dest paths.scripts.destination
@@ -60,9 +56,8 @@ gulp.task 'styles', ->
     .src paths.styles.source
     .pipe(stylus({set: ['include css']}))
     .on 'error', handleError
-    .pipe prefix 'last 2 versions', 'Chrome 34', 'Firefox 28', 'iOS 7'
 
-  styles = styles.pipe(CSSmin()) if production
+  styles = styles.pipe CSSmin() if production
 
   styles.pipe gulp.dest paths.styles.destination
     .pipe livereload()
@@ -71,6 +66,45 @@ gulp.task 'assets', ->
   gulp
     .src paths.assets.source
     .pipe gulp.dest paths.assets.destination
+
+gulp.task 'build-libs', ->
+
+  build = gulp.src [
+    "./src/coffee-script.min.js"
+    "./src/codemirror/lib/codemirror.js"
+    "./src/codemirror/addon/hint/show-hint.js"
+    "./src/codemirror/addon/hint/javascript-hint.js"
+    "./src/codemirror/mode/javascript/javascript.js"
+    "./src/codemirror/mode/coffeescript/coffeescript.js"
+    "./src/codemirror/mode/css/css.js"
+    "./src/jshint.js"
+    "./src/codemirror/addon/selection/active-line.js"
+    "./src/codemirror/addon/search/searchcursor.js"
+    "./src/codemirror/addon/search/search.js"
+    "./src/codemirror/addon/dialog/dialog.js"
+    "./src/codemirror/addon/edit/matchbrackets.js"
+    "./src/codemirror/addon/edit/closebrackets.js"
+    "./src/codemirror/addon/comment/comment.js"
+    "./src/codemirror/addon/wrap/hardwrap.js"
+    "./src/codemirror/addon/fold/foldcode.js"
+    "./src/codemirror/addon/fold/brace-fold.js"
+    "./src/codemirror/addon/fold/foldgutter.js"
+    "./src/codemirror/addon/fold/comment-fold.js"
+    "./src/codemirror/addon/fold/indent-fold.js"
+    "./src/codemirror/addon/lint/coffeelint.js"
+    "./src/codemirror/addon/lint/lint.js"
+    "./src/codemirror/addon/lint/javascript-lint.js"
+    "./src/codemirror/addon/lint/coffeescript-lint.js"
+    "./src/codemirror/keymap/sublime.js"
+    "./src/kd.libs.js"
+    "./src/kd.js"
+  ]
+
+  build.pipe streamify uglify() if production
+  build
+    .pipe concat 'coffeepad.js'
+    .pipe gulp.dest paths.scripts.destination
+
 
 gulp.task 'server', ->
   require('http')
@@ -102,5 +136,5 @@ gulp.task "watch", ->
 
   .emit 'update'
 
-gulp.task "build", ['scripts', 'styles', 'assets']
+gulp.task "build", ["build-libs", "scripts", "styles", "assets"]
 gulp.task "default", ["build", "watch", "server"]

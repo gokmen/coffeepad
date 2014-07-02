@@ -108,14 +108,12 @@ module.exports = class CoffeePad extends KDView
       cssClass : "clean-gray help"
       callback : @bound 'toggleHelpMode'
 
-
     @addSubView @fileListView
 
     @addSubView new KDButtonView
       title    : "Run"
       cssClass : "clean-gray run-button"
       callback : @bound 'runJsCode'
-
 
 
   attachListeners:->

@@ -486,7 +486,6 @@ h4.kdheaderview span {
   width: 20px;
   height: 18px;
   background-position: -80px -540px;
-  background-image: url("../images/_kd.sprites.png");
   background-color: transparent;
   background-repeat: no-repeat;
 }
@@ -618,7 +617,6 @@ span.close-tab,
   height: 20px;
   cursor: pointer;
   background-position: -60px -220px;
-  background-image: url("../images/_kd.sprites.png");
   background-color: transparent;
   background-repeat: no-repeat;
   position: absolute;
@@ -635,7 +633,6 @@ span.close-btn-x {
   overflow: hidden;
   width: 20px;
   height: 20px;
-  background-image: url("../images/_kd.sprites.png");
   background-color: transparent;
   background-repeat: no-repeat;
   background-position: -60px -220px;
@@ -1586,7 +1583,6 @@ KDInputView > KDTokenizedInputView styles
   right: 0;
   width: 20px;
   height: 20px;
-  background-image: url("../images/_kd.sprites.png");
   background-color: transparent;
   background-repeat: no-repeat;
   background-position: -80px -280px;
@@ -1626,7 +1622,6 @@ KDInputView > KDTokenizedInputView styles
   display: block;
   width: 20px;
   height: 20px;
-  background-image: url("../images/_kd.sprites.png");
   background-color: transparent;
   background-repeat: no-repeat;
   background-position: -80px -260px;
