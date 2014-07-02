@@ -7,6 +7,7 @@ watchify   = require 'watchify'
 concat     = require 'gulp-concat'
 source     = require 'vinyl-source-stream'
 streamify  = require 'gulp-streamify'
+symlink    = require 'gulp-sym'
 uglify     = require 'gulp-uglify'
 coffeeify  = require 'coffeeify'
 ecstatic   = require 'ecstatic'
@@ -107,34 +108,53 @@ gulp.task 'build-libs', ->
 
 
 gulp.task 'server', ->
-  require('http')
+  require 'http'
     .createServer ecstatic root: __dirname + '/public'
     .listen 1903
 
 gulp.task "watch", ->
   livereload.listen()
 
-  gulp.watch paths.styles.watch, ['styles']
+  gulp.watch paths.styles.watch,  ['styles']
   gulp.watch paths.scripts.watch, ['scripts']
-  gulp.watch paths.assets.watch, ['assets']
+  gulp.watch paths.assets.watch,  ['assets']
 
   bundle = watchify
-    entries: [paths.scripts.source]
-    extensions: ['.coffee']
+    entries    : [paths.scripts.source]
+    extensions : ['.coffee']
 
   bundle.transform coffeeify
 
   bundle.on 'update', ->
-    build = bundle.bundle(debug: not production)
+    build = bundle.bundle debug: not production
       .on 'error', handleError
 
       .pipe source paths.scripts.filename
 
     build
       .pipe gulp.dest paths.scripts.destination
-      .pipe(livereload())
+      .pipe livereload()
 
   .emit 'update'
 
-gulp.task "build", ["build-libs", "scripts", "styles", "assets"]
+gulp.task "create-links", ->
+
+  gulp
+
+    .src [
+      './src/images',
+      './src/css',
+      './src/chrome',
+      './src/index.html'
+    ]
+
+    .pipe symlink [
+      './public/images',
+      './public/css',
+      './public/chrome',
+      './public/index.html'
+    ]
+
+
+gulp.task "build", ["build-libs", "scripts", "styles", "assets", "create-links"]
 gulp.task "default", ["build", "watch", "server"]
