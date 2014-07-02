@@ -1,11 +1,11 @@
 
-CoffeeEditor         = require './coffeeeditor'
-JSEditor             = require './jseditor'
-Storage              = require './storage'
-SaveFileModal        = require './savemodal'
-CoffeePadHeader      = require './coffeepad-header'
-CPFileItem           = require './fileitem'
-CPMultipleChoice     = require './multiplechoice'
+CoffeeEditor     = require './coffeeeditor'
+JSEditor         = require './jseditor'
+Storage          = require './storage'
+SaveFileModal    = require './savemodal'
+CoffeePadHeader  = require './coffeepad-header'
+CPFileItem       = require './fileitem'
+CPMultipleChoice = require './multiplechoice'
 
 module.exports = class CoffeePad extends KDView
 
