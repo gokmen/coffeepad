@@ -16,19 +16,15 @@ livereload = require 'gulp-livereload'
 production = process.env.NODE_ENV is 'production'
 
 paths =
-  scripts:
-    source: './src/main.coffee'
-    destination: './public/js/'
-    watch: './src/*.coffee'
-    filename: 'main.js'
-  styles:
-    source: './src/styl/main.styl'
-    watch: './src/styl/*.styl'
-    destination: './public/css/'
-  assets:
-    source: './src/images/**/*.*'
-    watch: './src/images/**/*.*'
-    destination: './public/'
+  scripts       :
+    watch       : './src/*.coffee'
+    source      : './src/main.coffee'
+    destination : './public/js/'
+    filename    : 'main.js'
+  styles        :
+    source      : './src/styl/main.styl'
+    watch       : './src/styl/*.styl'
+    destination : './public/css/'
 
 handleError = (err) ->
   gutil.log err
@@ -53,6 +49,7 @@ gulp.task 'scripts', ->
     .pipe gulp.dest paths.scripts.destination
 
 gulp.task 'styles', ->
+
   styles = gulp
     .src paths.styles.source
     .pipe(stylus({set: ['include css']}))
@@ -63,10 +60,6 @@ gulp.task 'styles', ->
   styles.pipe gulp.dest paths.styles.destination
     .pipe livereload()
 
-gulp.task 'assets', ->
-  gulp
-    .src paths.assets.source
-    .pipe gulp.dest paths.assets.destination
 
 gulp.task 'build-libs', ->
 
@@ -117,7 +110,6 @@ gulp.task "watch", ->
 
   gulp.watch paths.styles.watch,  ['styles']
   gulp.watch paths.scripts.watch, ['scripts']
-  gulp.watch paths.assets.watch,  ['assets']
 
   bundle = watchify
     entries    : [paths.scripts.source]
@@ -153,8 +145,8 @@ gulp.task "create-links", ->
       './public/css',
       './public/chrome',
       './public/index.html'
-    ]
+    ], force: yes
 
 
-gulp.task "build", ["build-libs", "scripts", "styles", "assets", "create-links"]
+gulp.task "build", ["build-libs", "scripts", "styles", "create-links"]
 gulp.task "default", ["build", "watch", "server"]
