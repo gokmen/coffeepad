@@ -14,4 +14,28 @@ module.exports = class CPFileItem extends KDListItemView
       title    : "X"
       cssClass : 'clean-red'
       callback : =>
-        @getDelegate().emit "removeItem", this
+
+        modal = new KDModalView
+
+          title         : "Confirmation required..."
+          content       : """
+            <div class='modalformline'>
+              <p>Do you want to remove this script ?</p>
+            </div>
+          """
+
+          cssClass      : "savefile-modal"
+          width         : 305
+          overlay       : yes
+
+          buttons       :
+
+            Remove      :
+              style     : "kdbutton clean-gray"
+              callback  : =>
+                @getDelegate().emit "removeItem", this
+                modal.destroy()
+
+            Cancel      :
+              style     : "kdbutton clean-gray"
+              callback  : -> modal.destroy()
