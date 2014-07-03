@@ -96,6 +96,13 @@ module.exports = [
   {
     title: "Loops and Comprehensions"
     content: """
+      # Functions
+      eat = (food)->
+        console.log food
+
+      menu = (num, dish)->
+        console.info num, dish
+
       # Eat lunch.
       eat food for food in ['toast', 'cheese', 'wine']
 

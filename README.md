@@ -4,6 +4,7 @@
      src="https://raw.githubusercontent.com/gokmen/coffeepad/master/public/images/coffeepad-logo.png" />
 
 CoffeePad is actually nothing more than putting some awesome pieces together.
+It provides live compiling for CoffeeScript to JavaScript with hints.
 
 It's built with [Koding](https://koding.com)'s Framework
 [KD](https://github.com/koding/kd) uses
