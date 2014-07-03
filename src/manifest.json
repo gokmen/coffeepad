@@ -1,7 +1,7 @@
 {
   "name": "CoffeePad",
   "short_name": "coffeepad",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "author": "Gokmen Goksel",
   "description": "CoffeeScript console in the Web Inspector.",
   "devtools_page": "chrome/launcher.html",

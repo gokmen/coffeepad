@@ -94,6 +94,23 @@ module.exports = class CoffeePadHeader extends KDView
       cssClass : 'header-logo'
       partial  : "<img src='images/coffeepad-logo.png'/>"
 
+    @addSubView new KDView
+      cssClass : 'readme'
+      partial  : """
+        <p>CoffeePad is actually nothing more than putting some awesome pieces together.
+        It provides live compiling for CoffeeScript to JavaScript with hints.</p>
+
+        <p>It's built with <a href="https://koding.com">Koding</a>'s Framework
+        <a href="https://github.com/koding/kd">KD</a>, uses
+        <a href="http://codemirror.net/">CodeMirror</a> as editor and
+        <a href="http://coffeescript.org">CoffeeScript</a>'s browser compiler.</p>
+
+        <p>It can be used as <a href="https://chrome.google.com/webstore/detail/coffeepad/iomhnnbecciohkiilfebodfghbnpoopf">Chrome extension</a> or a standalone web app from <a href="http://coffeepad.co/">coffeepad.co</a>.
+        It keeps everyting in <code>localStorage</code> even in Chrome extension, which means there is no server dependency. Everything happens in your browser.</p>
+
+        <p>You can fork it from <a href="https://github.com/gokmen/coffeepad">https://github.com/gokmen/coffeepad</a></p>
+      """
+
     @addSubView @filterView = new KDInputView
       title       : "Filter"
       placeholder : "filter shortcuts"
