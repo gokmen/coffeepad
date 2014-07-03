@@ -1,7 +1,9 @@
-# CoffeePad: Yet another CoffeeScript editor [coffeepad.co](http://coffeepad.co/)
+# CoffeePad: CoffeeScript editor in your browser 
+
+[coffeepad.co](http://coffeepad.co/)
 
 <img width="100%" align="center"
-     src="https://raw.githubusercontent.com/gokmen/coffeepad/master/public/images/coffeepad-logo.png" />
+     src="https://raw.githubusercontent.com/gokmen/coffeepad/master/src/images/screenshot.png" />
 
 CoffeePad is actually nothing more than putting some awesome pieces together.
 It provides live compiling for CoffeeScript to JavaScript with hints.
