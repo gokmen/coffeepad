@@ -6,6 +6,7 @@ SaveFileModal    = require './savemodal'
 CoffeePadHeader  = require './coffeepad-header'
 CPFileItem       = require './fileitem'
 CPMultipleChoice = require './multiplechoice'
+CoffeeExamples   = require './examples'
 
 module.exports = class CoffeePad extends KDView
 
@@ -18,6 +19,15 @@ module.exports = class CoffeePad extends KDView
 
     @header  = new CoffeePadHeader parent: this
     @header.appendToDomBody()
+
+    @loadExamples()
+
+  loadExamples:->
+
+    @storage.filter /file\-/, (files)=>
+      return if files.length > 0
+      for example in CoffeeExamples
+        @storage.setValue "file-#{example.title}", example.content
 
   viewAppended:->
 
