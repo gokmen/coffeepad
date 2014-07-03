@@ -129,6 +129,7 @@ module.exports = class CoffeePad extends KDView
   attachListeners:->
 
     @fileListView.on 'removeItem', (item)=>
+      @coffeeEditor.fileName = null
       @storage.unsetKey item.data.name
       @updateFileList()
 
@@ -162,16 +163,16 @@ module.exports = class CoffeePad extends KDView
 
     @storage.getValue "lastFile", (file)=>
 
-      if not file or not @storage.data[file]?
-        file = @createNewFile()
-
-      @coffeeEditor.openFile file
-      @updateFileList file
+      @coffeeEditor.openFile file  if file?
 
       @fileList.on 'ItemSelectionPerformed', (..., {items})=>
-        @coffeeEditor.handleSave yes
+
+        if @coffeeEditor.fileName?
+          @coffeeEditor.handleSave yes
+
         @coffeeEditor.openFile items.first.data.name
 
+      @updateFileList file
 
   toggleHelpMode:->
 
@@ -219,18 +220,19 @@ module.exports = class CoffeePad extends KDView
 
   updateFileList:(newname)->
 
+    @loadExamples()
     prevFile = newname ? @fileList.first?.data?.name
-    @storage.filter /file\-/, (files)=>
-      @fileList.replaceAllItems files
 
-      if files.length is 0
-        @coffeeEditor.openFile file = @createNewFile()
-        return @updateFileList file
+    @storage.filter /file\-/, (files)=>
+
+      @fileList.replaceAllItems files
 
       if prevFile
         for item in @fileList.itemsOrdered
           if item.data.name is prevFile
             @fileList.selectItem item
+      else
+        @fileList.selectItem @fileList.itemsOrdered.last
 
 
   runJsCode:->
