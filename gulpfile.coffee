@@ -65,6 +65,7 @@ gulp.task 'build-libs', ->
 
   build = gulp.src [
     "./src/coffee-script.min.js"
+    "./src/js2coffee.min.js"
     "./src/codemirror/lib/codemirror.js"
     "./src/codemirror/addon/hint/show-hint.js"
     "./src/codemirror/addon/hint/javascript-hint.js"

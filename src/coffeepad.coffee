@@ -10,6 +10,8 @@ CoffeeExamples   = require './examples'
 
 module.exports = class CoffeePad extends KDView
 
+  @Compilers = { "Coffee2Js", "Js2Coffee" }
+
   constructor:(options = {}, data)->
 
     options.cssClass = "main-view"
@@ -52,7 +54,7 @@ module.exports = class CoffeePad extends KDView
       views        : [ @coffeeEditor, @jsEditor ]
 
     @multipleChoice = new CPMultipleChoice
-      labels       : ['JavaScript', '...']
+      labels       : ['JavaScript', 'Js2Coffee', 'Files']
       cssClass     : 'options-button'
       defaultValue : []
       multiple     : yes
@@ -60,7 +62,7 @@ module.exports = class CoffeePad extends KDView
 
         {added, removed} = @multipleChoice._lastOperation
 
-        if "JavaScript" is added
+        if 'JavaScript' is added
           @storage.setValue 'hideJs', no
           @splitView.showPanel 1, =>
             @jsEditor.cm.refresh()
@@ -68,31 +70,29 @@ module.exports = class CoffeePad extends KDView
             @splitView.unsetClass "js-hidden"
           @splitView.options.sizes = ["50%", "50%"]
 
-        if "JavaScript" is removed
+        else if 'JavaScript' is removed
           @storage.setValue 'hideJs', yes
           @jsEditor.cm.setOption "lineWrapping", no
           @hideJsPane()
 
-        if "..." is added
+        if 'Files' is added
           @setClass 'in'
           @storage.setValue 'hidePanel', no
 
-        if "..." is removed
+        else if "Files" is removed
           @unsetClass 'in'
           @storage.setValue 'hidePanel', yes
 
+        if 'Js2Coffee' is added
+          @setCompiler CoffeePad.Compilers.Js2Coffee
+          @storage.setValue 'js2coffee', yes
+          new KDNotificationView title: "Coffee ⇠ Js selected"
+        else if "Js2Coffee" is removed
+          @setCompiler()
+          @storage.setValue 'js2coffee', no
+          new KDNotificationView title: "Coffee ⇢ Js selected"
+
         KD.utils.defer => @coffeeEditor.cm.focus()
-
-    KD.utils.defer =>
-
-      {hideJs, hidePanel} = @storage.data
-      if not hideJs or hideJs is "false"
-        @multipleChoice.setValue 'JavaScript'
-      else
-        @hideJsPane()
-
-      if not hidePanel or hidePanel is "false"
-        @multipleChoice.setValue '...'
 
     @addSubView @multipleChoice
     @addSubView @splitView
@@ -128,24 +128,36 @@ module.exports = class CoffeePad extends KDView
 
   attachListeners:->
 
+    KD.utils.defer =>
+
+      {hideJs, hidePanel, js2coffee} = @storage.data
+      if not hideJs or hideJs is "false"
+        @multipleChoice.setValue 'JavaScript'
+      else
+        @hideJsPane()
+
+      if not hidePanel or hidePanel is "false"
+        @multipleChoice.setValue 'Files'
+
+      if js2coffee is "true"
+        @multipleChoice.setValue 'Js2Coffee'
+
+
     @fileListView.on 'removeItem', (item)=>
       @coffeeEditor.fileName = null
       @storage.unsetKey item.data.name
       @updateFileList()
 
-    @coffeeEditor.compile @jsEditor
-
-    @coffeeEditor.on "change", =>
-      @coffeeEditor.compile @jsEditor
+    @setCompiler CoffeePad.Compilers.Coffee2Js, yes
 
     @jsEditor.on     "runCode", @bound 'runJsCode'
     @coffeeEditor.on "runCode", @bound 'runJsCode'
 
     @jsEditor.on "toggleFiles", =>
-      @multipleChoice.setValue '...'
+      @multipleChoice.setValue 'Files'
 
     @coffeeEditor.on "toggleFiles", =>
-      @multipleChoice.setValue '...'
+      @multipleChoice.setValue 'Files'
 
     @jsEditor.on "toggleJs", =>
       @multipleChoice.setValue 'JavaScript'
@@ -253,3 +265,15 @@ module.exports = class CoffeePad extends KDView
     @splitView.hidePanel 1
     @splitView.setClass "js-hidden"
     @splitView.options.sizes = ["100%", "0%"]
+
+
+  setCompiler:(compiler = CoffeePad.Compilers.Coffee2Js, compile)->
+
+    [source, target] = [@coffeeEditor, @jsEditor]
+    if compiler is CoffeePad.Compilers.Js2Coffee
+      [source, target] = [target, source]
+
+    target.off "change"
+    source.compile target  if compile
+    source.on "change", ->
+      source.compile target
