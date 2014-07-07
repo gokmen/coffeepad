@@ -15,6 +15,7 @@ module.exports = class CoffeePad extends KDView
   constructor:(options = {}, data)->
 
     options.cssClass = "main-view"
+    options.bind     = "mousemove"
     super options, data
 
     @storage = new Storage()
@@ -41,7 +42,7 @@ module.exports = class CoffeePad extends KDView
     @fileList = new KDListViewController
       selection    : yes
       viewOptions  :
-        cssClass   : "file-list"
+        cssClass   : "file-list control"
         wrapper    : yes
         itemClass  : CPFileItem
 
@@ -55,7 +56,7 @@ module.exports = class CoffeePad extends KDView
 
     @multipleChoice = new CPMultipleChoice
       labels       : ['JavaScript', 'Js2Coffee', 'Files']
-      cssClass     : 'options-button'
+      cssClass     : 'options-button control'
       defaultValue : []
       multiple     : yes
       callback     : =>
@@ -99,7 +100,7 @@ module.exports = class CoffeePad extends KDView
 
     @addSubView new KDButtonView
       title    : "+"
-      cssClass : "clean-gray create-new"
+      cssClass : "clean-gray create-new control"
       callback : => @jsEditor.ready =>
 
         @coffeeEditor.handleSave yes
@@ -115,15 +116,25 @@ module.exports = class CoffeePad extends KDView
 
     @addSubView new KDButtonView
       title    : "?"
-      cssClass : "clean-gray help"
+      cssClass : "clean-gray help control"
       callback : @bound 'toggleHelpMode'
 
     @addSubView @fileListView
 
     @addSubView new KDButtonView
       title    : "Run"
-      cssClass : "clean-gray run-button"
+      cssClass : "clean-gray run-button control"
       callback : @bound 'runJsCode'
+
+    @_body = $('body')
+
+  mouseMove:->
+    return unless @_body?
+    @_body.removeClass 'hideControls'
+    clearTimeout @controlTimer
+    @controlTimer = KD.utils.wait 2000, =>
+      console.log "Disable"
+      @_body.addClass 'hideControls'
 
 
   attachListeners:->
