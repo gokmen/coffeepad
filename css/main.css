@@ -1,0 +1,244 @@
+body,
+html {
+  height: 100%;
+  width: 100%;
+  font-family: Arial;
+}
+.split-view.js-hidden .kdsplitview-resizer:last-child {
+  display: none;
+}
+.kdview.kdsplitview-resizer:last-child {
+  width: 3px;
+  background: #333;
+}
+.kdview.kdsplitview-resizer:last-child:hover {
+  background: #333;
+}
+.options-button {
+  opacity: 0.9;
+  position: absolute;
+  right: 32px;
+  top: 10px;
+  z-index: 10000;
+  -webkit-transition: -webkit-transform 0.3s ease;
+  -moz-transition: -moz-transform 0.3s ease;
+  transition: transform 0.3s ease;
+}
+.options-button:hover {
+  opacity: 1;
+}
+.kdlistview.file-list {
+  width: 130px;
+  top: 40px;
+  right: 0;
+  position: absolute;
+  z-index: 10000;
+  -webkit-transform: translateX(220px);
+  -moz-transform: translateX(220px);
+  transform: translateX(220px);
+  -webkit-transition: -webkit-transform 0.3s ease;
+  -moz-transition: -moz-transform 0.3s ease;
+  transition: transform 0.3s ease;
+}
+.kdlistview.file-list .kdlistitemview {
+  height: 10px;
+  padding: 5px;
+  border-bottom: 1px solid #ccc;
+  background: rgba(255,255,255,0.9);
+  cursor: pointer;
+  font-size: 14px;
+}
+.kdlistview.file-list .kdlistitemview h1 {
+  width: 120px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 11px;
+}
+.kdlistview.file-list .kdlistitemview:first-of-type {
+  border-top-left-radius: 5px;
+}
+.kdlistview.file-list .kdlistitemview:last-of-type {
+  border-bottom-left-radius: 5px;
+}
+.kdlistview.file-list .kdlistitemview:hover {
+  background: #ddd;
+}
+.kdlistview.file-list .kdlistitemview:hover h1 {
+  width: 100px;
+}
+.kdlistview.file-list .kdlistitemview:hover button {
+  display: block;
+}
+.kdlistview.file-list .kdlistitemview.selected {
+  background: #b12520;
+  color: #fff;
+}
+.kdlistview.file-list .kdlistitemview button {
+  display: none;
+  top: 1px;
+  right: 14px;
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  text-shadow: none;
+  padding: 0;
+}
+.cp-header {
+  -webkit-transform: translateY(-100%);
+  -moz-transform: translateY(-100%);
+  transform: translateY(-100%);
+  background: rgba(0,0,0,0.8);
+  height: 100%;
+  text-align: center;
+  position: absolute;
+  z-index: 10011;
+  color: #fff;
+  -webkit-transition: -webkit-transform 0.1s ease-out;
+  -moz-transition: -moz-transform 0.1s ease-out;
+  transition: transform 0.1s ease-out;
+}
+.cp-header input.kdinput.text {
+  width: calc(100% - 40px);
+  max-width: 580px;
+  margin: 10px 20px 20px 20px;
+}
+.cp-header .header-logo {
+  height: 30px;
+  background: #b12520;
+  opacity: 0.8;
+  margin-bottom: 10px;
+  background: #b12520;
+}
+.cp-header .header-logo img {
+  height: 30px;
+}
+.cp-header .readme {
+  color: #ccc;
+  height: auto;
+  width: calc(100% - 40px);
+  max-width: 580px;
+  margin: 0 auto;
+  text-align: left;
+  font-size: 12px;
+  line-height: 15px;
+}
+.cp-header .readme a {
+  color: #fff;
+  text-decoration: none;
+}
+.cp-header .readme a:hover {
+  text-decoration: none;
+}
+.cp-header .readme p {
+  margin-bottom: 5px;
+}
+.cp-header .kdlistview {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  overflow: scroll;
+  height: calc(100% - 50px);
+}
+.cp-header .kdlistitemview {
+  height: 28px;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  cursor: default;
+}
+.cp-header h2 {
+  float: left;
+  padding: 7px 10px;
+  font-size: 14px;
+  width: 100%;
+  text-align: left;
+  text-shadow: 0 0 2px #000;
+}
+.cp-header .shortcuts {
+  position: absolute;
+  right: 0;
+  padding: 10px;
+  font-size: 10px;
+  font-family: Monaco;
+}
+.cp-header .shortcuts cite {
+  color: #000;
+  border: 1px solid #ccc;
+  padding: 2px;
+  border-radius: 2px;
+  margin: 3px;
+  background: #eee;
+  box-shadow: 0 0 2px #000;
+}
+body.helpMode .cp-header {
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  transform: translateY(0);
+}
+.main-view.in .file-list {
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+  transform: translateX(0);
+}
+.savefile-modal .kdformview .formline .input-wrapper {
+  margin-bottom: 0;
+}
+.savefile-modal .kdmodal-inner .button-field {
+  border-radius: 5px !important;
+}
+.savefile-modal input {
+  border: none !important;
+}
+.savefile-modal button.kdbutton {
+  right: 10px;
+  top: 10px;
+}
+button.create-new {
+  position: absolute;
+  top: 10px;
+  right: 6px;
+  width: 21px;
+  height: 21px;
+  padding: 0;
+  z-index: 100;
+}
+button.help {
+  position: absolute;
+  top: 10px;
+  right: 200px;
+  width: 21px;
+  height: 21px;
+  padding: 0;
+  z-index: 100;
+  background: none;
+  border: none;
+  text-shadow: none;
+  color: #fff;
+}
+button.help:hover {
+  color: #000;
+}
+button.close-help {
+  position: absolute;
+  top: 58px;
+}
+button.run-button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  z-index: 100;
+}
+.on-off.multiple-choice a {
+  border: none;
+  box-shadow: none;
+}
+.on-off.multiple-choice a.active {
+  background: #b12520;
+  border: none;
+  border-color: none;
+}
+.CodeMirror {
+  height: 100%;
+  width: 100%;
+  font-size: 13px;
+  font-family: Monaco, monospace;
+  line-height: 18px;
+}
