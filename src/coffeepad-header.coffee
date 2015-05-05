@@ -105,7 +105,7 @@ module.exports = class CoffeePadHeader extends KDView
         <a href="http://codemirror.net/">CodeMirror</a> as editor and
         <a href="http://coffeescript.org">CoffeeScript</a>'s browser compiler.</p>
 
-        <p>It can be used as <a href="https://chrome.google.com/webstore/detail/coffeepad/iomhnnbecciohkiilfebodfghbnpoopf">Chrome extension</a> or a standalone web app from <a href="http://coffeepad.co/">coffeepad.co</a>.
+        <p>It can be used as <a href="https://chrome.google.com/webstore/detail/coffeepad/iomhnnbecciohkiilfebodfghbnpoopf">Chrome extension</a> or a standalone web app from <a href="http://coffeepad.rocks/">coffeepad.rocks</a>.
         It keeps everyting in <code>localStorage</code> even in Chrome extension, which means there is no server dependency. Everything happens in your browser.</p>
 
         <p>You can fork it from <a href="https://github.com/gokmen/coffeepad">https://github.com/gokmen/coffeepad</a></p>
