@@ -1,4 +1,4 @@
-# CoffeePad [coffeepad.co](http://coffeepad.co/)
+# CoffeePad [coffeepad.rocks](http://coffeepad.rocks/)
 ### CoffeeScript editor in your browser
 
 <img width="100%" align="center"
@@ -12,7 +12,7 @@ It's built with [Koding](https://koding.com)'s Framework
 [CodeMirror](http://codemirror.net/) as editor and
 [CoffeeScript](http://coffeescript.org)'s browser compiler.
 
-It can be used as [Chrome extension](https://chrome.google.com/webstore/detail/coffeepad/iomhnnbecciohkiilfebodfghbnpoopf) or a standalone web app from [coffeepad.co](http://coffeepad.co/).
+It can be used as [Chrome extension](https://chrome.google.com/webstore/detail/coffeepad/iomhnnbecciohkiilfebodfghbnpoopf) or a standalone web app from [coffeepad.rocks](http://coffeepad.rocks/).
 It keeps everyting in `localStorage` even in Chrome extension, which means there is no server dependency. Everything happens in your browser.
 
 You can fork it from https://github.com/gokmen/coffeepad
